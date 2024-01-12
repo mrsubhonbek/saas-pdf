@@ -74,7 +74,7 @@ export const Dashboard = () => {
                     onClick={() => deleteFile({ id: file.id })}
                     size={"sm"}
                     className="w-full"
-                    variant={"destructive"}>
+                    variant={"secondary"}>
                     {currentlyDeletingFile ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (

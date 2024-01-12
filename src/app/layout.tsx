@@ -26,10 +26,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <Providers>
         <body
-          className={cn(
-            "min-h-screen font-sans antialiased grayscale",
-            inter.className
-          )}>
+          className={cn("min-h-screen font-sans antialiased", inter.className)}>
           <Navbar />
           {children}
         </body>
