@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
-import Container from "@/components/ui/container";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+
+import { Container } from "@/components/ui/container";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
           upload your file and start asking questions right away.
         </p>
         <Button asChild className="sm:text-lg mt-5">
-          <Link href={"/dashboard"} target="_blank" className="gap-1">
+          <Link href={"/dashboard"} className="gap-1">
             Get started
             <svg
               xmlns="http://www.w3.org/2000/svg"

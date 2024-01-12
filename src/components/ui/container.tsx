@@ -5,7 +5,7 @@ type SidebarProps = {
   children?: ReactNode;
   className?: string;
 };
-function Container({ children, className, ...rest }: SidebarProps) {
+export const Container = ({ children, className, ...rest }: SidebarProps) => {
   return (
     <section
       className={cn(
@@ -16,6 +16,4 @@ function Container({ children, className, ...rest }: SidebarProps) {
       {children}
     </section>
   );
-}
-
-export default Container;
+};

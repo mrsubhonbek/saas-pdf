@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/server";
 
-import Container from "./ui/container";
+import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Container } from "./ui/container";
 import { buttonVariants } from "./ui/button";
 
 export const Navbar = () => {
