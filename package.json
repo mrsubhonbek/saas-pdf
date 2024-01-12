@@ -15,11 +15,13 @@
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@tanstack/react-query": "^5.17.9",
     "@trpc/client": "^11.0.0-next-alpha.172",
     "@trpc/next": "^11.0.0-next-alpha.172",
     "@trpc/react-query": "^11.0.0-next-alpha.172",
     "@trpc/server": "^11.0.0-next-alpha.172",
+    "@uploadthing/react": "^6.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^3.2.0",
@@ -32,6 +34,7 @@
     "react-pdf": "^7.7.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
+    "uploadthing": "^6.1.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {

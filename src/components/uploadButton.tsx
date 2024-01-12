@@ -7,11 +7,42 @@ import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Cloud, File, Loader2 } from "lucide-react";
 import { Progress } from "./ui/progress";
+import { useUploadThing } from "@/lib/uploadthing";
+import { useToast } from "./ui/use-toast";
+import { trpc } from "@/app/_trpc/client";
+import { useRouter } from "next/navigation";
 
 export const UploadButton = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const { toast } = useToast();
+  const { startUpload } = useUploadThing("imageUploader");
+
+  const startSimulatedProgress = () => {
+    setUploadProgress(0);
+
+    const interval = setInterval(() => {
+      setUploadProgress((prevProgress) => {
+        if (prevProgress >= 95) {
+          clearInterval(interval);
+          return prevProgress;
+        }
+        return prevProgress + 5;
+      });
+    }, 500);
+
+    return interval;
+  };
+
+  const { mutate: startPolling } = trpc.getFile.useMutation({
+    onSuccess: (file) => {
+      router.push(`/dashboard/${file.id}`);
+    },
+    retry: true,
+    retryDelay: 500,
+  });
 
   return (
     <Dialog
@@ -27,7 +58,40 @@ export const UploadButton = () => {
         <Button>Upload PDF</Button>
       </DialogTrigger>
       <DialogContent>
-        <Dropzone multiple={false} onDrop={(acceptedFile) => {}}>
+        <Dropzone
+          multiple={false}
+          onDrop={async (acceptedFile) => {
+            setIsUploading(true);
+            const progressInterval = startSimulatedProgress();
+
+            const res = await startUpload(acceptedFile);
+
+            if (!res) {
+              return toast({
+                title: "Something went wrong",
+                description: "Please try again later",
+                variant: "destructive",
+              });
+            }
+
+            // await new Promise((res) => setTimeout(res, 100000));
+            const [fileResponse] = res;
+
+            const key = fileResponse?.key;
+
+            if (!key) {
+              return toast({
+                title: "Something went wrong",
+                description: "Please try again later",
+                variant: "destructive",
+              });
+            }
+
+            clearInterval(progressInterval);
+            setUploadProgress(100);
+
+            startPolling({ key });
+          }}>
           {({ getRootProps, getInputProps, acceptedFiles }) => (
             <div
               {...getRootProps()}
