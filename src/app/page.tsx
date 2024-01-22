@@ -94,7 +94,8 @@ export default function Home() {
               </span>
               <span className="text-xl font-semibold">Upload you PDF file</span>
               <span className="mt-2 text-neutral-500">
-                We'll process your file and make it ready for you to chat with.
+                We&apos;ll process your file and make it ready for you to chat
+                with.
               </span>
             </div>
           </li>
@@ -107,8 +108,8 @@ export default function Home() {
                 Start asking questions
               </span>
               <span className="mt-2 text-neutral-500">
-                It's that simple. try out Quill today - it really takes less
-                than a minute.
+                It&apos;s that simple. try out Quill today - it really takes
+                less than a minute.
               </span>
             </div>
           </li>

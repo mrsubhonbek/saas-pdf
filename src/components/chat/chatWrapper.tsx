@@ -12,14 +12,14 @@ export const ChatWrapper = ({ fileId }: { fileId: string }) => {
   const { data, isLoading } = trpc.getFileUploadStatus.useQuery(
     {
       fileId,
-    },
-    {
-      refetchInterval: (res) =>
-        res?.state?.data?.status === "SUCCESS" ||
-        res?.state?.data?.status === "FAILED"
-          ? false
-          : 500,
     }
+    // {
+    //   refetchInterval: (res) =>
+    //     res?.state?.data?.status === "SUCCESS" ||
+    //     res?.state?.data?.status === "FAILED"
+    //       ? false
+    //       : 500,
+    // }
   );
   if (isLoading)
     return (
