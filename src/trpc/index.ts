@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { privetProducer, publicProcedure, router } from "./trpc";
+import { privateProducer, publicProcedure, router } from "./trpc";
 import { db } from "@/db";
 
 export const appRouter = router({
@@ -29,7 +29,7 @@ export const appRouter = router({
 
     return { success: true };
   }),
-  getUserFiles: privetProducer.query(async ({ ctx }) => {
+  getUserFiles: privateProducer.query(async ({ ctx }) => {
     const { userId, user } = ctx;
 
     return await db.file.findMany({
@@ -38,7 +38,20 @@ export const appRouter = router({
       },
     });
   }),
-  getFile: privetProducer
+  getFileUploadStatus: privateProducer
+    .input(z.object({ fileId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const file = await db.file.findFirst({
+        where: {
+          id: input.fileId,
+          userId: ctx.userId,
+        },
+      });
+
+      if (!file) return { status: "PENDING" as const };
+      return { status: file.uploadStatus };
+    }),
+  getFile: privateProducer
     .input(z.object({ key: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { userId } = ctx;
@@ -54,7 +67,7 @@ export const appRouter = router({
 
       return file;
     }),
-  deleteFile: privetProducer
+  deleteFile: privateProducer
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { userId } = ctx;

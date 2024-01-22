@@ -19,7 +19,6 @@ export const AuthCallBackPage = () => {
   if (isError) {
     router.push("sing-in");
   }
-  console.log(data, "==========data");
 
   return (
     <div className="w-full mt-24 flex justify-center">

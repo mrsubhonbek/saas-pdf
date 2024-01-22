@@ -27,6 +27,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { PdfFullscreen } from "./pdfFullscreen";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -72,7 +73,7 @@ export const PdfREader = ({ url }: PropsType) => {
 
   return (
     <div className="w-full bg-black rounded-md shadow shadow-neutral-700 flex flex-col items-center">
-      <div className="h-14 w-full border-b border-neutral-800 flex items-center justify-between px-2">
+      <div className="min-h-14 py-2.5 w-full border-b border-neutral-800 flex items-center justify-between px-2">
         <div className="flex items-center gap-1.5">
           <Button
             disabled={currPage <= 1}
@@ -152,6 +153,7 @@ export const PdfREader = ({ url }: PropsType) => {
             aria-label="rotate 90 degrees">
             <RotateCw className="h-4 w-4" />
           </Button>
+          <PdfFullscreen fileUrl={url} />
         </div>
       </div>
       <div className="flex-1 w-full max-h-screen">
