@@ -3,20 +3,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { trpc } from "../_trpc/client";
 
-export const AuthCallBackPage = () => {
+const AuthCallBackPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const origin = searchParams.get("origin");
-  const { data, isSuccess, isError } = trpc.authCallback.useQuery(
-    undefined,
-    {}
-  );
+  const { isSuccess, isError } = trpc.authCallback.useQuery();
 
   if (isSuccess) {
     router.push(origin ? `/${origin}` : "/dashboard");
-  }
-
-  if (isError) {
+  } else if (isError) {
     router.push("sing-in");
   }
 
