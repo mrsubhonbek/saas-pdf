@@ -10,7 +10,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: process.env.OPENAI_API_KEY!,
+          url: process.env.BATCH_LINK!,
         }),
       ],
     })
