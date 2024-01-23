@@ -10,7 +10,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: process.env.BATCH_LINK!,
+          url: "https://saas-pdf-nine.vercel.app/api/trpc",
         }),
       ],
     })
